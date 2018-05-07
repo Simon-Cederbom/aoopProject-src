@@ -27,13 +27,13 @@ public class ToolBox {
 			p.openFile();
 		});
 		menu.add(menuItem);
-		/* //TODO
-		 * menuItem = new JMenuItem("Save image");
-		 * menuItem.setMnemonic(KeyEvent.VK_S); menuItem.addActionListener(a ->
-		 * { int returnVal = fc.showOpenDialog(fc); if (returnVal ==
-		 * JFileChooser.APPROVE_OPTION) { File file = fc.getSelectedFile();
-		 * System.out.println("då"); } });
-		 */
+
+		menuItem = new JMenuItem("Save image");
+		menuItem.setMnemonic(KeyEvent.VK_S);
+		menuItem.addActionListener(a -> {
+			p.saveFile();
+		});
+
 		menu.add(menuItem);
 
 		menuItem = new JMenuItem("Filter1");

@@ -19,12 +19,12 @@ public class ImagePresenter extends Presenter {
 	public void setLabel(JLabel l) {
 		label = l;
 	}
-	
-	public BufferedImage getImage(){
+
+	public BufferedImage getImage() {
 		return this.img;
 	}
-	
-	public void setImage(BufferedImage img){
+
+	public void setImage(BufferedImage img) {
 		this.img = img;
 	}
 
@@ -38,6 +38,7 @@ public class ImagePresenter extends Presenter {
 		label.repaint();
 		System.out.println("active filter: " + filter);
 	}
+
 	public void showImage(BufferedImage img) {
 		label.setIcon(new ImageIcon(img));
 		label.repaint();
@@ -58,24 +59,30 @@ public class ImagePresenter extends Presenter {
 			System.out.println(file);
 		}
 	}
-
+	//TODO Fixa så man slipper skriva vilket filnamn man ska spara som. "testImg.jpg" ska bli "testImg"
 	public void saveFile() {
-		// TODO
+		int saveValue = fc.showSaveDialog(null);
+		if (saveValue == JFileChooser.APPROVE_OPTION) {
+			try {
+				ImageIO.write(img, "png",fc.getSelectedFile());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		openFile();
-		// TODO Fixa AE för saveFile
+
 	}
 
 	public void setFilter(String filter) {
-		if(filter.equals("noRed")){
+		if (filter.equals("noRed")) {
 			this.filter = filter;
 			img = Filters.noRed(img);
 			showImage(img);
 		}
-		
-		
-		//TODO fixa typ en array med filteralgoritmer som ska apliceras på bilden.
+
+		// TODO fixa typ en array med filteralgoritmer som ska apliceras på
+		// bilden.
 	}
 }
