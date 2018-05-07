@@ -2,16 +2,19 @@ package framework;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
-/*TODO En ctrl+v och ctrl+y funktion 
-*	Help
-*	About
-*/
 public class ToolBox {
+	
+	ArrayList<Edit> edits = new ArrayList<Edit>();
 
-	public static JMenuBar createMenuBar(Presenter p) {
+	public static JMenuBar createMenuBar(Presenter p , Editor editor) {
+		
+		for(Edit e : editor.getEdits()){
+			edits.add(e);
+		}
 		
 		JMenuBar menuBar;
 		JMenu menu, menu2;

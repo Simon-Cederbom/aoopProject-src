@@ -2,11 +2,11 @@ package app;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import framework.ImageEdit;
+import framework.Edit;
 
-public class NoRed extends ImageEdit {
+public class NoRed extends Edit {
 
-	public BufferedImage filter(BufferedImage img) {
+	public BufferedImage edit(BufferedImage img) {
 
 		for (int y = 0; y < img.getHeight(); ++y) {
 			for (int x = 0; x < img.getWidth(); ++x) {

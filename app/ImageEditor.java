@@ -1,13 +1,13 @@
 package app;
 
-import framework.ImageEdit;
+import framework.Edit;
 
 public class ImageEditor {
 
-	public ImageEdit[] getFilters() {
-		ImageEdit[] filters = { new NoRed() };
+	public Edit[] getEdits() {
+		Edit[] edits = { new NoRed() };
 
-		return filters;
+		return edits;
 
 	}
 }
