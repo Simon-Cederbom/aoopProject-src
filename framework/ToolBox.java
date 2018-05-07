@@ -9,63 +9,58 @@ import javax.swing.*;
 public class ToolBox extends JMenuBar {
 
 	private ArrayList<Edit> edits = new ArrayList<Edit>();
+	
+	private JMenuBar menuBar;
+	private JMenu fileMenu, filterMenu;
+	private JMenuItem menuItem;
 
-	public JMenuBar createToolBox(Presenter p, Editor editor) {
+	public JMenuBar getMenuBar(){
+		return this.menuBar;
+	}
+
+	public ToolBox(Presenter p, Editor editor) {
 
 		for (Edit e : editor.getEdits()) {
 			edits.add(e);
 		}
 
-		JMenuBar menuBar;
-		JMenu menu, menu2;
-		JMenuItem menuItem;
-
 		menuBar = new JMenuBar();
 
-		menu = new JMenu("File");
-		menu.setMnemonic(KeyEvent.VK_F);
-		menuBar.add(menu);
-		menu2 = new JMenu("Filter");
-		menu2.setMnemonic(KeyEvent.VK_I);
-		menuBar.add(menu2);
+		fileMenu = new JMenu("File");
+		fileMenu.setMnemonic(KeyEvent.VK_F);
+		menuBar.add(fileMenu);
+		filterMenu = new JMenu("Filters");
+		filterMenu.setMnemonic(KeyEvent.VK_I);
+		menuBar.add(filterMenu);
 
-		menuItem = new JMenuItem("Open image");
+		menuItem = new JMenuItem("Open Image");
 		menuItem.setMnemonic(KeyEvent.VK_O);
 		menuItem.addActionListener(e -> {
+			p.openImage();
 		});
-		menu.add(menuItem);
+		fileMenu.add(menuItem);
 
-		menuItem = new JMenuItem("Save image");
+		menuItem = new JMenuItem("Save Image");
 		menuItem.setMnemonic(KeyEvent.VK_S);
 		menuItem.addActionListener(a -> {
+			p.saveFile();
 		});
+		fileMenu.add(menuItem);
 
-		menu.add(menuItem);
-
-		// for(Edit edit : edits){
-		// menuItem = new JMenuItem("Test");
-		// //menuItem.setMnemonic(KeyEvent.VK_1); //TODO LÄGG TILL KNAPP OCH
-		// NAMN I EDIT
-		// menuItem.addActionListener(a -> {
-		// p.setEdit(edit);
-		// });
-		// menu2.add(menuItem);
-		// }
-		//
-		menuItem = new JMenuItem("Filter1");
-		menuItem.setMnemonic(KeyEvent.VK_1);
-		menuItem.addActionListener(a -> {
-		});
-		menu2.add(menuItem);
-
-		menuItem = new JMenuItem("Filter2");
-		menuItem.setMnemonic(KeyEvent.VK_2);
-		menuItem.addActionListener(a -> {
-			System.out.println("Filter2");
-		});
-		menu2.add(menuItem);
+		for (Edit edit : edits) {
+			menuItem = new JMenuItem("" + edit.getClass().getName().substring(4));
+			menuItem.addActionListener(a -> {
+				p.setEdit(edit);
+			});
+			filterMenu.add(menuItem);
+		}
 		
-		return menuBar;
+		menuItem = new JMenuItem("Reset Image");
+		menuItem.setMnemonic(KeyEvent.VK_R);
+		menuItem.addActionListener(e -> {
+			p.resetImage();
+		});
+		filterMenu.add(menuItem);
 
 	}
 

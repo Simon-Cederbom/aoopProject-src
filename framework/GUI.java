@@ -18,11 +18,10 @@ public class GUI extends JFrame {
 		JFrame frame = new JFrame("Image Processing");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Add contents to the window.
-		ToolBox tb = new ToolBox();
-		frame.setJMenuBar(tb.createToolBox(p, editor));
+		frame.setJMenuBar((new ToolBox(p, editor)).getMenuBar());
 		JLabel label = new JLabel();
 		label.setPreferredSize(new Dimension(500, 500));
-//		((ImagePresenter)p).setLabel(label);
+		((ImagePresenter) p).setLabel(label);
 		frame.add(label);
 		// Display the window.
 		frame.pack();

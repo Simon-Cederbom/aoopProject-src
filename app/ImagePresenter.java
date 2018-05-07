@@ -1,8 +1,8 @@
 package app;
 
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
 import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -10,9 +10,9 @@ import javax.swing.*;
 import framework.Edit;
 import framework.Presenter;
 
-
 public class ImagePresenter extends Presenter {
 
+	private BufferedImage originalImg;
 	private BufferedImage img;
 	private JLabel label;
 	final JFileChooser fc = new JFileChooser();
@@ -32,11 +32,11 @@ public class ImagePresenter extends Presenter {
 	public void showImage(File file) {
 		try {
 			img = ImageIO.read(file);
+			label.setIcon(new ImageIcon(img));
+			label.repaint();
 		} catch (IOException e) {
 			throw new RuntimeException("File could not be opened");
 		}
-		label.setIcon(new ImageIcon(img));
-		label.repaint();
 	}
 
 	public void showImage(BufferedImage img) {
@@ -44,12 +44,17 @@ public class ImagePresenter extends Presenter {
 		label.repaint();
 	}
 
-	public void openFile() {
+	public void openImage() {
 		int returnVal = fc.showOpenDialog(fc);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			File file = fc.getSelectedFile();
-			showImage(file);
-			System.out.println(file);
+			try {
+				img = ImageIO.read(file);
+				originalImg = deepCopy(img);
+				showImage(img);
+			} catch (IOException e) {
+				throw new RuntimeException("File could not be opened");
+			}
 		}
 	}
 
@@ -66,15 +71,26 @@ public class ImagePresenter extends Presenter {
 		}
 	}
 
-	// TODO fixa typ en array med filteralgoritmer som ska apliceras på
-	// bilden.
 	public void setEdit(Edit e) {
-		img = e.edit(img);
+		this.img = e.edit(img);
 		showImage(img);
 	}
 
-	public void actionPerformed(ActionEvent e) {
+	public void resetImage() {
+		img = deepCopy(originalImg);
+		showImage(img);
+	}
+	
+	public void undoImage() {
+		
+		showImage(img);
+	}
 
+	static BufferedImage deepCopy(BufferedImage bi) {
+		ColorModel cm = bi.getColorModel();
+		boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+		WritableRaster raster = bi.copyData(null);
+		return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
 	}
 
 }
