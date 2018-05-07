@@ -10,7 +10,7 @@ public class NoBlue extends Edit {
 
 		for (int y = 0; y < img.getHeight(); ++y) {
 			for (int x = 0; x < img.getWidth(); ++x) {
-				img.setRGB(x, y, (new Color(255, 255, 0, 255).getRGB()) * (img.getRGB(x, y)));
+				img.setRGB(x, y, (new Color(1, 1, 0).getRGB()) * (img.getRGB(x, y)));
 			}
 		}
 

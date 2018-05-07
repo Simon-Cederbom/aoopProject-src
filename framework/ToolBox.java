@@ -1,6 +1,5 @@
 package framework;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -11,7 +10,7 @@ public class ToolBox extends JMenuBar {
 	private ArrayList<Edit> edits = new ArrayList<Edit>();
 	
 	private JMenuBar menuBar;
-	private JMenu fileMenu, filterMenu;
+	private JMenu fileMenu, filterMenu, subMenu;
 	private JMenuItem menuItem;
 
 	public JMenuBar getMenuBar(){
@@ -36,7 +35,7 @@ public class ToolBox extends JMenuBar {
 		menuItem = new JMenuItem("Open Image");
 		menuItem.setMnemonic(KeyEvent.VK_O);
 		menuItem.addActionListener(e -> {
-			p.openImage();
+			p.openFile();
 		});
 		fileMenu.add(menuItem);
 
@@ -46,19 +45,37 @@ public class ToolBox extends JMenuBar {
 			p.saveFile();
 		});
 		fileMenu.add(menuItem);
+		
+		menuItem = new JMenuItem("Exit");
+		menuItem.setMnemonic(KeyEvent.VK_E);
+		menuItem.addActionListener(a -> {
+			System.exit(0);
+		});
+		fileMenu.add(menuItem);
+		
+		subMenu = new JMenu("Filters");
 
 		for (Edit edit : edits) {
 			menuItem = new JMenuItem("" + edit.getClass().getName().substring(4));
 			menuItem.addActionListener(a -> {
 				p.setEdit(edit);
 			});
-			filterMenu.add(menuItem);
+			subMenu.add(menuItem);
 		}
 		
-		menuItem = new JMenuItem("Reset Image");
+		filterMenu.add(subMenu);
+		
+		menuItem = new JMenuItem("Undo");
+		menuItem.setMnemonic(KeyEvent.VK_C);
+		menuItem.addActionListener(e -> {
+			p.undo();
+		});
+		filterMenu.add(menuItem);
+		
+		menuItem = new JMenuItem("Reset");
 		menuItem.setMnemonic(KeyEvent.VK_R);
 		menuItem.addActionListener(e -> {
-			p.resetImage();
+			p.reset();
 		});
 		filterMenu.add(menuItem);
 

@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
 import java.io.*;
+import java.util.Stack;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -12,8 +14,8 @@ import framework.Presenter;
 
 public class ImagePresenter extends Presenter {
 
-	private BufferedImage originalImg;
-	private BufferedImage img;
+	Stack<BufferedImage> imgStack = new Stack<BufferedImage>();
+
 	private JLabel label;
 	final JFileChooser fc = new JFileChooser();
 
@@ -21,50 +23,34 @@ public class ImagePresenter extends Presenter {
 		label = l;
 	}
 
-	public BufferedImage getImage() {
-		return this.img;
-	}
-
-	public void setImage(BufferedImage img) {
-		this.img = img;
-	}
-
-	public void showImage(File file) {
-		try {
-			img = ImageIO.read(file);
-			label.setIcon(new ImageIcon(img));
-			label.repaint();
-		} catch (IOException e) {
-			throw new RuntimeException("File could not be opened");
-		}
-	}
-
 	public void showImage(BufferedImage img) {
 		label.setIcon(new ImageIcon(img));
 		label.repaint();
 	}
 
-	public void openImage() {
+	public void openFile() {
 		int returnVal = fc.showOpenDialog(fc);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			File file = fc.getSelectedFile();
 			try {
-				img = ImageIO.read(file);
-				originalImg = deepCopy(img);
-				showImage(img);
+				imgStack.push(ImageIO.read(file));
+				showImage(imgStack.peek());
 			} catch (IOException e) {
 				throw new RuntimeException("File could not be opened");
 			}
 		}
+
 	}
 
-	// TODO Fixa så man slipper skriva vilket filnamn man ska spara som.
-	// "testImg.jpg" ska bli "testImg"
+	/*
+	 * TODO Fixa så man slipper skriva vilket filnamn man ska spara som.
+	 * "testImg.jpg" ska bli "testImg"
+	 */
 	public void saveFile() {
 		int saveValue = fc.showSaveDialog(null);
 		if (saveValue == JFileChooser.APPROVE_OPTION) {
 			try {
-				ImageIO.write(img, "png", fc.getSelectedFile());
+				ImageIO.write(imgStack.peek(), "png", fc.getSelectedFile());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -72,18 +58,24 @@ public class ImagePresenter extends Presenter {
 	}
 
 	public void setEdit(Edit e) {
-		this.img = e.edit(img);
-		showImage(img);
+		imgStack.push(e.edit(deepCopy(imgStack.peek())));
+		showImage(imgStack.peek());
 	}
 
-	public void resetImage() {
-		img = deepCopy(originalImg);
-		showImage(img);
+	public void reset() {
+		BufferedImage img = deepCopy(imgStack.peek());
+		while (!imgStack.isEmpty()) {
+			img = deepCopy(imgStack.pop());
+		}
+		imgStack.push(deepCopy(img));
+		showImage(imgStack.peek());
 	}
-	
-	public void undoImage() {
-		
-		showImage(img);
+
+	public void undo() {
+		if (imgStack.size() > 1) {
+			imgStack.pop();
+		}
+		showImage(imgStack.peek());
 	}
 
 	static BufferedImage deepCopy(BufferedImage bi) {

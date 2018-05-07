@@ -3,11 +3,13 @@ package framework;
 
 public abstract class Presenter {
 
-	public abstract void openImage();
+	public abstract void openFile();
 
 	public abstract void saveFile();
 	
-	public abstract void resetImage();
+	public abstract void reset();
+	
+	public abstract void undo();
 	
 	public abstract void setEdit(Edit edit);
 	
