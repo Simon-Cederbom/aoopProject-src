@@ -1,4 +1,3 @@
-package aoopProject;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;

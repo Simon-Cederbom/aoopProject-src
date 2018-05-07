@@ -5,8 +5,6 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import aoopProject.Filters;
-
 public class ImagePresenter extends Presenter {
 
 	private BufferedImage img;
