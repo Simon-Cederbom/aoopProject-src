@@ -7,6 +7,7 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import framework.Edit;
 import framework.Presenter;
 
 
@@ -14,7 +15,6 @@ public class ImagePresenter extends Presenter {
 
 	private BufferedImage img;
 	private JLabel label;
-	private String filter;
 	final JFileChooser fc = new JFileChooser();
 
 	public void setLabel(JLabel l) {
@@ -37,13 +37,11 @@ public class ImagePresenter extends Presenter {
 		}
 		label.setIcon(new ImageIcon(img));
 		label.repaint();
-		System.out.println("active filter: " + filter);
 	}
 
 	public void showImage(BufferedImage img) {
 		label.setIcon(new ImageIcon(img));
 		label.repaint();
-		System.out.println("active filter: " + filter);
 	}
 
 	public void openFile() {
@@ -70,16 +68,13 @@ public class ImagePresenter extends Presenter {
 
 	// TODO fixa typ en array med filteralgoritmer som ska apliceras på
 	// bilden.
-	public void setFilter(String filter) {
-		if (filter.equals("noRed")) {
-			this.filter = filter;
-			//img = Filter(img);
-			showImage(img);
-		}
-
+	public void setEdit(Edit e) {
+		img = e.edit(img);
+		showImage(img);
 	}
 
 	public void actionPerformed(ActionEvent e) {
 
 	}
+
 }

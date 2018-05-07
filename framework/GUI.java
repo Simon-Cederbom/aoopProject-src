@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import app.ImageEditor;
 import app.ImagePresenter;
 
 public class GUI extends JFrame {
@@ -12,15 +13,16 @@ public class GUI extends JFrame {
 	 * Create the GUI and show it. For thread safety, this method should be
 	 * invoked from the event dispatch thread.
 	 */
-	private GUI(Presenter p) {
+	private GUI(Presenter p, Editor editor) {
 		// Create and set up the window.
 		JFrame frame = new JFrame("Image Processing");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Add contents to the window.
-		frame.setJMenuBar(ToolBox.createMenuBar(p));
+		ToolBox tb = new ToolBox();
+		frame.setJMenuBar(tb.createToolBox(p, editor));
 		JLabel label = new JLabel();
 		label.setPreferredSize(new Dimension(500, 500));
-		((ImagePresenter)p).setLabel(label);
+//		((ImagePresenter)p).setLabel(label);
 		frame.add(label);
 		// Display the window.
 		frame.pack();
@@ -32,8 +34,7 @@ public class GUI extends JFrame {
 		// creating and showing this application's GUI.
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				Presenter p = new ImagePresenter();
-				GUI gui = new GUI(p);
+				GUI gui = new GUI(new ImagePresenter(), new ImageEditor());
 			}
 		});
 	}

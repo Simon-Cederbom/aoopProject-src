@@ -7,6 +7,6 @@ public abstract class Presenter {
 
 	public abstract void saveFile();
 	
-	public abstract void setFilter(String filter);
+	public abstract void setEdit(Edit edit);
 	
 }
