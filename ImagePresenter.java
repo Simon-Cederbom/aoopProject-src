@@ -5,19 +5,29 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import aoopProject.Filters;
+
 public class ImagePresenter extends Presenter {
 
 	private BufferedImage img;
-	private JLabel imagelabel;
 	private JLabel label;
+	private String filter;
 	final JFileChooser fc = new JFileChooser();
 
 	public ImagePresenter() {
-		imagelabel = createCenterComponent();
+		label = createCenterComponent();
 	}
 
 	public void setLabel(JLabel l) {
 		label = l;
+	}
+	
+	public BufferedImage getImage(){
+		return this.img;
+	}
+	
+	public void setImage(BufferedImage img){
+		this.img = img;
 	}
 
 	public void showImage(File file) {
@@ -28,6 +38,12 @@ public class ImagePresenter extends Presenter {
 		}
 		label.setIcon(new ImageIcon(img));
 		label.repaint();
+		System.out.println("active filter: " + filter);
+	}
+	public void showImage(BufferedImage img) {
+		label.setIcon(new ImageIcon(img));
+		label.repaint();
+		System.out.println("active filter: " + filter);
 	}
 
 	public JLabel createCenterComponent() {
@@ -49,12 +65,19 @@ public class ImagePresenter extends Presenter {
 		// TODO
 	}
 
-	public JLabel getImageLabel() {
-		return imagelabel;
-	}
-
 	public void actionPerformed(ActionEvent e) {
 		openFile();
 		// TODO Fixa AE för saveFile
+	}
+
+	public void setFilter(String filter) {
+		if(filter.equals("noRed")){
+			this.filter = filter;
+			img = Filters.noRed(img);
+			showImage(img);
+		}
+		
+		
+		//TODO fixa typ en array med filteralgoritmer som ska apliceras på bilden.
 	}
 }

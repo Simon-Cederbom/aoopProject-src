@@ -39,7 +39,7 @@ public class ToolBox {
 		menuItem = new JMenuItem("Filter1");
 		menuItem.setMnemonic(KeyEvent.VK_1);
 		menuItem.addActionListener(a -> {
-			System.out.println("Filter1");
+			p.setFilter("noRed");
 		});
 		menu2.add(menuItem);
 

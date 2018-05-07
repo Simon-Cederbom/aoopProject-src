@@ -1,12 +1,6 @@
-import java.awt.Container;
 import java.awt.Dimension;
-import java.io.File;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 public class GUI extends JFrame {
 
