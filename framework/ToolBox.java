@@ -1,13 +1,18 @@
-import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.IOException;
+package framework;
 
-import javax.imageio.ImageIO;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
 import javax.swing.*;
 
+/*TODO En ctrl+v och ctrl+y funktion 
+*	Help
+*	About
+*/
 public class ToolBox {
 
 	public static JMenuBar createMenuBar(Presenter p) {
+		
 		JMenuBar menuBar;
 		JMenu menu, menu2;
 		JMenuItem menuItem;
