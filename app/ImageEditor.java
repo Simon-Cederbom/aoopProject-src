@@ -6,7 +6,7 @@ import framework.Editor;
 public class ImageEditor extends Editor{
 
 	public Edit[] getEdits() {
-		Edit[] edits = { new OnlyRed(), new NoBlue(), new Greyscale(), new FlipX() };
+		Edit[] edits = { new OnlyRed(), new NoBlue(), new Greyscale(), new FlipX(), new Swirl(), new Stripes() };
 
 		return edits;
 
