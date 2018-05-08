@@ -8,10 +8,12 @@ import javax.swing.*;
 public class ToolBox extends JMenuBar {
 
 	private ArrayList<Edit> edits = new ArrayList<Edit>();
+	private ArrayList<ScaleableEdit> scaleableEdits = new ArrayList<ScaleableEdit>();
 	
 	private JMenuBar menuBar;
 	private JMenu fileMenu, filterMenu, subMenu;
 	private JMenuItem menuItem;
+	private KeyStroke keyStrokeToOpen;
 
 	public JMenuBar getMenuBar(){
 		return this.menuBar;
@@ -21,6 +23,9 @@ public class ToolBox extends JMenuBar {
 
 		for (Edit e : editor.getEdits()) {
 			edits.add(e);
+		}
+		for (ScaleableEdit e : editor.getScaleableEdits()) {
+			scaleableEdits.add(e);
 		}
 
 		menuBar = new JMenuBar();
@@ -34,6 +39,8 @@ public class ToolBox extends JMenuBar {
 
 		menuItem = new JMenuItem("Open Image");
 		menuItem.setMnemonic(KeyEvent.VK_O);
+		keyStrokeToOpen = KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK);
+		menuItem.setAccelerator(keyStrokeToOpen);
 		menuItem.addActionListener(e -> {
 			p.openFile();
 		});
@@ -41,6 +48,8 @@ public class ToolBox extends JMenuBar {
 
 		menuItem = new JMenuItem("Save Image");
 		menuItem.setMnemonic(KeyEvent.VK_S);
+		keyStrokeToOpen = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK);
+		menuItem.setAccelerator(keyStrokeToOpen);
 		menuItem.addActionListener(a -> {
 			p.saveFile();
 		});
@@ -56,17 +65,28 @@ public class ToolBox extends JMenuBar {
 		subMenu = new JMenu("Filters");
 
 		for (Edit edit : edits) {
-			menuItem = new JMenuItem("" + edit.getClass().getName().substring(4));
+			menuItem = new JMenuItem(edit.getClass().getName().substring(4));
 			menuItem.addActionListener(a -> {
 				p.setEdit(edit);
 			});
 			subMenu.add(menuItem);
 		}
 		
+		for (ScaleableEdit edit : scaleableEdits) {
+			JSlider slider = new JSlider(JSlider.HORIZONTAL);
+			menuItem = new JMenuItem(edit.getClass().getName().substring(4));
+			menuItem.addActionListener(a -> {
+				p.setEdit(edit, slider.getValue());
+			});
+			subMenu.add(menuItem);
+			subMenu.add(slider);
+		}
 		filterMenu.add(subMenu);
 		
 		menuItem = new JMenuItem("Undo");
-		menuItem.setMnemonic(KeyEvent.VK_C);
+		menuItem.setMnemonic(KeyEvent.VK_Z);
+		keyStrokeToOpen = KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK);
+		menuItem.setAccelerator(keyStrokeToOpen);
 		menuItem.addActionListener(e -> {
 			p.undo();
 		});
@@ -74,6 +94,8 @@ public class ToolBox extends JMenuBar {
 		
 		menuItem = new JMenuItem("Reset");
 		menuItem.setMnemonic(KeyEvent.VK_R);
+		keyStrokeToOpen = KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK);
+		menuItem.setAccelerator(keyStrokeToOpen);
 		menuItem.addActionListener(e -> {
 			p.reset();
 		});

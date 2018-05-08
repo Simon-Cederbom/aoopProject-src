@@ -10,7 +10,7 @@ public class FlipX extends Edit {
 	public BufferedImage edit(BufferedImage img) {
 
 		AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
-		tx.translate(-img.getWidth(null), 0);
+		tx.translate(-img.getWidth(), 0);
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 		return op.filter(img, null);
 

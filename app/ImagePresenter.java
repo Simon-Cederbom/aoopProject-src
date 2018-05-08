@@ -11,6 +11,7 @@ import javax.swing.*;
 
 import framework.Edit;
 import framework.Presenter;
+import framework.ScaleableEdit;
 
 public class ImagePresenter extends Presenter {
 
@@ -57,6 +58,11 @@ public class ImagePresenter extends Presenter {
 		}
 	}
 
+	public void setEdit(ScaleableEdit e, int scale) {
+		imgStack.push(e.edit(deepCopy(imgStack.peek()), scale));
+		showImage(imgStack.peek());
+	}
+	
 	public void setEdit(Edit e) {
 		imgStack.push(e.edit(deepCopy(imgStack.peek())));
 		showImage(imgStack.peek());

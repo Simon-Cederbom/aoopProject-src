@@ -24,4 +24,5 @@ public class Stripes extends Edit {
 
 		return img;
 	}
+
 }
