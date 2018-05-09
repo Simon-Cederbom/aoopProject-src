@@ -15,7 +15,8 @@ import framework.ScaleableEdit;
 
 public class ImagePresenter extends Presenter {
 
-	Stack<BufferedImage> imgStack = new Stack<BufferedImage>();
+	private Stack<BufferedImage> imgStack = new Stack<BufferedImage>();
+	private BufferedImage redo = null;
 
 	private JLabel label;
 	final JFileChooser fc = new JFileChooser();
@@ -62,13 +63,14 @@ public class ImagePresenter extends Presenter {
 		imgStack.push(e.edit(deepCopy(imgStack.peek()), scale));
 		showImage(imgStack.peek());
 	}
-	
+
 	public void setEdit(Edit e) {
 		imgStack.push(e.edit(deepCopy(imgStack.peek())));
 		showImage(imgStack.peek());
 	}
 
 	public void reset() {
+		redo = deepCopy(imgStack.peek());
 		BufferedImage img = deepCopy(imgStack.peek());
 		while (!imgStack.isEmpty()) {
 			img = deepCopy(imgStack.pop());
@@ -78,10 +80,18 @@ public class ImagePresenter extends Presenter {
 	}
 
 	public void undo() {
+		redo = deepCopy(imgStack.peek());
 		if (imgStack.size() > 1) {
 			imgStack.pop();
 		}
 		showImage(imgStack.peek());
+	}
+
+	public void redo() {
+		if (redo != null) {
+			imgStack.push(redo);
+			showImage(imgStack.peek());
+		}
 	}
 
 	static BufferedImage deepCopy(BufferedImage bi) {

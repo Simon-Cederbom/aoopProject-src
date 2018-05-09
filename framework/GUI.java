@@ -3,8 +3,6 @@ package framework;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 
 import app.ImageEditor;
 import app.ImagePresenter;
@@ -25,7 +23,7 @@ public class GUI extends JFrame {
 		frame.add(label);
 		frame.pack();
 		frame.setVisible(true);
-		
+
 	}
 
 	public static void main(String[] args) {

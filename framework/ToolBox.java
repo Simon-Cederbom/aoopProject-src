@@ -77,6 +77,7 @@ public class ToolBox extends JMenuBar {
 			menuItem = new JMenuItem(edit.getClass().getName().substring(4));
 			menuItem.addActionListener(a -> {
 				p.setEdit(edit, slider.getValue());
+				slider.setValue(50);
 			});
 			subMenu.add(menuItem);
 			subMenu.add(slider);
@@ -89,6 +90,15 @@ public class ToolBox extends JMenuBar {
 		menuItem.setAccelerator(keyStrokeToOpen);
 		menuItem.addActionListener(e -> {
 			p.undo();
+		});
+		filterMenu.add(menuItem);
+		
+		menuItem = new JMenuItem("Redo");
+		menuItem.setMnemonic(KeyEvent.VK_Y);
+		keyStrokeToOpen = KeyStroke.getKeyStroke(KeyEvent.VK_Y, KeyEvent.CTRL_DOWN_MASK);
+		menuItem.setAccelerator(keyStrokeToOpen);
+		menuItem.addActionListener(e -> {
+			p.redo();
 		});
 		filterMenu.add(menuItem);
 		

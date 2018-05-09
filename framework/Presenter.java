@@ -11,6 +11,8 @@ public abstract class Presenter {
 	
 	public abstract void undo();
 	
+	public abstract void redo();
+	
 	public abstract void setEdit(ScaleableEdit edit, int scale);
 	
 	public abstract void setEdit(Edit edit);
