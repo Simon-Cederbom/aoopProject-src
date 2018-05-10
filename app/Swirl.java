@@ -3,11 +3,11 @@ package app;
 import java.awt.image.BufferedImage;
 import framework.ScaleableEdit;
 
-public class Swirl extends ScaleableEdit{
+public class Swirl extends ScaleableEdit {
 
 	public BufferedImage edit(BufferedImage img, int scale) {
-		
-		double scaleDouble = (scale - 50)/((double)100);
+
+		double scaleDouble = (scale - 50) / ((double) 100);
 		final double width = img.getWidth();
 		final double height = img.getHeight();
 		BufferedImage sImg = new BufferedImage(img.getWidth(), img.getHeight(), img.getType());
@@ -20,7 +20,14 @@ public class Swirl extends ScaleableEdit{
 				double theta1 = 50 * scaleDouble * r * (0.5 - r) + theta;
 				int xs = (int) ((0.5 + (r < 0.5 ? r * Math.cos(theta1) : xr)) * width);
 				int ys = (int) ((0.5 + (r < 0.5 ? r * Math.sin(theta1) : yr)) * height);
-				sImg.setRGB(xs,ys,img.getRGB(x, y));
+				sImg.setRGB(xs, ys, img.getRGB(x, y));
+			}
+		}
+		for (int x = 5; x < width; x++) {
+			for (int y = 5; y < height; y++) {
+				if (sImg.getRGB(x, y) == 0) {
+					sImg.setRGB(x, y, sImg.getRGB(x - 5, y-5));
+				}
 			}
 		}
 		return sImg;
