@@ -1,14 +1,9 @@
 package app;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import framework.Edit;
-
-/*TODO
- * Fixa färgerna till att bara bli mörkare och inte galna.
- */
 
 public class Chess extends Edit {
 
@@ -25,10 +20,11 @@ public class Chess extends Edit {
 						&& y < img.getHeight() - img.getHeight() % 11) {
 					white = !white;
 				}
-				if (white) {
-					img.setRGB(x, y, (int) (img.getRGB(x, y) * 0.5 ));
-				}
-				else img.setRGB(x, y, (int) (img.getRGB(x, y) * 1.5));
+				if (white) { // HÄR fixa ljus / mörk
+					img.setRGB(x, y, new Color(img.getRGB(x, y)).brighter().getRGB());
+
+				} else
+					img.setRGB(x, y, new Color(img.getRGB(x, y)).darker().getRGB());
 			}
 		}
 
@@ -38,7 +34,6 @@ public class Chess extends Edit {
 }
 
 // Fungerar för att göra ett rutmönster men vet ej om det är uppgiften.
-
 
 // Graphics g = img.getGraphics();
 // g.setColor(new Color(0, 0, 0));
