@@ -1,8 +1,11 @@
 package framework;
 
 import java.awt.Dimension;
+import java.awt.ScrollPane;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 
 import app.ImageEditor;
 import app.ImagePresenter;
@@ -18,9 +21,9 @@ public class GUI extends JFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setJMenuBar((new ToolBox(p, editor)).getMenuBar());
 		JLabel label = new JLabel();
-		label.setPreferredSize(new Dimension(500, 500));
+		frame.setPreferredSize(new Dimension(500, 500));
 		((ImagePresenter) p).setLabel(label);
-		frame.add(label);
+		frame.add(new JScrollPane(label));
 		frame.pack();
 		frame.setVisible(true);
 

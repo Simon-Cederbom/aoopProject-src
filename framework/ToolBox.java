@@ -3,7 +3,11 @@ package framework;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JSlider;
+import javax.swing.KeyStroke;
 
 public class ToolBox extends JMenuBar {
 
