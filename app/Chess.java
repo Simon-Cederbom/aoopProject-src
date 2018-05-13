@@ -5,10 +5,6 @@ import java.awt.image.BufferedImage;
 
 import framework.Edit;
 
-/*TODO
- * Only works with odd numbers of squares,
- * a chessboard has 8 by 8.
- */
 
 public class Chess extends Edit {
 
@@ -17,12 +13,12 @@ public class Chess extends Edit {
 		boolean white = true;
 
 		for (int x = 0; x < img.getWidth(); x++) {
-			if (x % (img.getWidth() / 9) == 0 && x > img.getWidth() % 9 && x < img.getWidth() - img.getWidth() % 9) {
+			if (x % (img.getWidth() / 8) == 0 && x > img.getWidth() % 8 && x < img.getWidth() - img.getWidth() % 8) {
 				white = !white;
 			}
 			for (int y = 0; y < img.getHeight(); y++) {
-				if (y % (img.getHeight() / 9) == 0 && y > img.getHeight() % 9
-						&& y < img.getHeight() - img.getHeight() % 9) {
+				if (y % (img.getHeight() / 8) == 0 && y > img.getHeight() % 8
+						&& y < img.getHeight() - img.getHeight() % 8) {
 					white = !white;
 				}
 				if (white) {
@@ -31,6 +27,7 @@ public class Chess extends Edit {
 				} else
 					img.setRGB(x, y, new Color(img.getRGB(x, y)).darker().getRGB());
 			}
+			white = !white; //Byter färg igen för att när den slutar på svart på en rad så ska den börja med vit på nästa
 		}
 
 		return img;

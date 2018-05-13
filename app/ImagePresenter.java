@@ -19,7 +19,7 @@ public class ImagePresenter extends Presenter {
 	private BufferedImage redo = null;
 
 	private JLabel label;
-	final JFileChooser fc = new JFileChooser();
+	private final JFileChooser fc = new JFileChooser();
 
 	public void setLabel(JLabel l) {
 		label = l;
@@ -69,13 +69,12 @@ public class ImagePresenter extends Presenter {
 		showImage(imgStack.peek());
 	}
 
+	//Ändrade för att optimera lite men också för consistency
 	public void reset() {
 		redo = deepCopy(imgStack.peek());
-		BufferedImage img = deepCopy(imgStack.peek());
-		while (!imgStack.isEmpty()) {
-			img = deepCopy(imgStack.pop());
+		while (imgStack.size() > 1) {
+			imgStack.pop();
 		}
-		imgStack.push(deepCopy(img));
 		showImage(imgStack.peek());
 	}
 

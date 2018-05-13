@@ -41,7 +41,7 @@ public class ToolBox extends JMenuBar {
 		filterMenu.setMnemonic(KeyEvent.VK_I);
 		menuBar.add(filterMenu);
 
-		menuItem = new JMenuItem("Open Image");
+		menuItem = new JMenuItem("Open File");
 		menuItem.setMnemonic(KeyEvent.VK_O);
 		keyStrokeToOpen = KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK);
 		menuItem.setAccelerator(keyStrokeToOpen);
@@ -50,7 +50,7 @@ public class ToolBox extends JMenuBar {
 		});
 		fileMenu.add(menuItem);
 
-		menuItem = new JMenuItem("Save Image");
+		menuItem = new JMenuItem("Save File");
 		menuItem.setMnemonic(KeyEvent.VK_S);
 		keyStrokeToOpen = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK);
 		menuItem.setAccelerator(keyStrokeToOpen);
