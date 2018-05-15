@@ -6,8 +6,21 @@ import java.awt.image.BufferedImage;
 
 import framework.Edit;
 
+/**
+ * 
+ * A filter to create a circle on top of an image
+ *
+ */
 public class Circle extends Edit {
 
+	/**
+	 * 
+	 * Creates a circle on top of the image
+	 * 
+	 * @param img The image to be changed
+	 * 
+	 * @return The filtered image
+	 */
 	public BufferedImage edit(BufferedImage img) {
 
 		Graphics g = img.getGraphics();

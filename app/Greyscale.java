@@ -6,8 +6,23 @@ import java.awt.image.ColorConvertOp;
 
 import framework.Edit;
 
+/**
+ * 
+ * A filter to remove all colors from an image
+ *
+ */
 public class Greyscale extends Edit {
 
+	/**
+	 * Removes all filters from the image
+	 * 
+	 * @param img The image to be changed
+	 * 
+	 * @precondition There should be no filters on the image already
+	 * 
+	 * @return The filtered image
+	 */
+	//Bara på source image?
 	public BufferedImage edit(BufferedImage img) {
 
 		ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
