@@ -6,13 +6,25 @@ import java.awt.image.WritableRaster;
 
 import framework.ScaleableEdit;
 
+/**
+ * 
+ * A filter that swirls an image
+ *
+ */
 public class Swirl extends ScaleableEdit {
 
 	
 	/*TODO
 	 *  Use bilinear interpolation to get the color to get rid of the noise.
 	 */
-	
+	/**
+	 * Swirls the image
+	 * 
+	 * @param img The image to be changed
+	 * @param scale A value to choose how much the image should swirl and in what direction
+	 * 
+	 * @return The filtered image
+	 */
 	public BufferedImage edit(BufferedImage img, int scale) {
 		
 		double scaleDouble = (scale - 50) / ((double) 10000);

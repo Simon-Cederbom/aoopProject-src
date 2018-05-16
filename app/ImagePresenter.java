@@ -13,6 +13,11 @@ import framework.Edit;
 import framework.Presenter;
 import framework.ScaleableEdit;
 
+/**
+ * 
+ * A class which controls all actions connected to an image
+ *
+ */
 public class ImagePresenter extends Presenter {
 
 	private Stack<BufferedImage> imgStack = new Stack<BufferedImage>();
@@ -21,15 +26,29 @@ public class ImagePresenter extends Presenter {
 	private JLabel label;
 	private final JFileChooser fc = new JFileChooser();
 
+	/**
+	 * Sets the private label
+	 * 
+	 * @param l The label to set the private label to
+	 */
 	public void setLabel(JLabel l) {
 		label = l;
 	}
 
+	/**
+	 * Shows the image
+	 * 
+	 * @param img The image to be shown
+	 */
 	public void showImage(BufferedImage img) {
 		label.setIcon(new ImageIcon(img));
 		label.repaint();
 	}
 
+	/**
+	 * Opens a file chosen by the user
+	 * 
+	 */
 	public void openFile() {
 		int returnVal = fc.showOpenDialog(fc);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -48,6 +67,10 @@ public class ImagePresenter extends Presenter {
 	 * TODO Fixa så man slipper skriva vilket filnamn man ska spara som.
 	 * "testImg.jpg" ska bli "testImg"
 	 */
+	/**
+	 * Saves the current file
+	 * 
+	 */
 	public void saveFile() {
 		int saveValue = fc.showSaveDialog(null);
 		if (saveValue == JFileChooser.APPROVE_OPTION) {
@@ -59,17 +82,31 @@ public class ImagePresenter extends Presenter {
 		}
 	}
 
+	/**
+	 * Applies a filter to the current image
+	 * 
+	 * @param e The scalable filter to be used
+	 * @param scale A value which determines how much the filter should affect the image
+	 */
 	public void setEdit(ScaleableEdit e, int scale) {
 		imgStack.push(e.edit(deepCopy(imgStack.peek()), scale));
 		showImage(imgStack.peek());
 	}
 
+	/**
+	 * Applies a filter to the current image
+	 * 
+	 * @param e The filter to be used
+	 */
 	public void setEdit(Edit e) {
 		imgStack.push(e.edit(deepCopy(imgStack.peek())));
 		showImage(imgStack.peek());
 	}
 
-	//Ändrade för att optimera lite men också för consistency
+	/**
+	 * Resets the image to the original version
+	 * 
+	 */
 	public void reset() {
 		redo = deepCopy(imgStack.peek());
 		while (imgStack.size() > 1) {
@@ -78,6 +115,10 @@ public class ImagePresenter extends Presenter {
 		showImage(imgStack.peek());
 	}
 
+	/**
+	 * Removes the last change to the image
+	 * 
+	 */
 	public void undo() {
 		redo = deepCopy(imgStack.peek());
 		if (imgStack.size() > 1) {
@@ -86,6 +127,10 @@ public class ImagePresenter extends Presenter {
 		showImage(imgStack.peek());
 	}
 
+	/**
+	 * Applies the last removed change to the image
+	 * 
+	 */
 	public void redo() {
 		if (redo != null) {
 			imgStack.push(redo);
@@ -93,6 +138,12 @@ public class ImagePresenter extends Presenter {
 		}
 	}
 
+	/**
+	 * Copies an image
+	 * 
+	 * @param bi The image to be copied
+	 * @return The copy of the image
+	 */
 	static BufferedImage deepCopy(BufferedImage bi) {
 		ColorModel cm = bi.getColorModel();
 		boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();

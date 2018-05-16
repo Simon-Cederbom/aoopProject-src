@@ -7,8 +7,20 @@ import java.awt.image.BufferedImage;
 import framework.Edit;
 
 
+/**
+ * 
+ * A filter that creates stripes on top of an image
+ *
+ */
 public class Stripes extends Edit {
 
+	/**
+	 * Creates stripes on top of the image
+	 * 
+	 * @param img The image to be changed
+	 * 
+	 * @return The filtered image
+	 */
 	public BufferedImage edit(BufferedImage img) {
 
 		Graphics g = img.getGraphics();
