@@ -25,6 +25,7 @@ public class GUI extends JFrame {
 		((ImagePresenter) p).setLabel(label);
 		frame.add(new JScrollPane(label));
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 
 	}

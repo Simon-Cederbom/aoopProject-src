@@ -10,8 +10,6 @@ import framework.ScaleableEdit;
  *
  */
 public class ImageEditor extends Editor{
-
-	//Lägga till add edit?
 	
 	/**
 	 * Creates an array of all non scalable filters

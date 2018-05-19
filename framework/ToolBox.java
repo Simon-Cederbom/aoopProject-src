@@ -3,6 +3,7 @@ package framework;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -15,7 +16,7 @@ public class ToolBox extends JMenuBar {
 	private ArrayList<ScaleableEdit> scaleableEdits = new ArrayList<ScaleableEdit>();
 	
 	private JMenuBar menuBar;
-	private JMenu fileMenu, filterMenu, subMenu;
+	private JMenu fileMenu, filterMenu, subMenu, helpMenu;
 	private JMenuItem menuItem;
 	private KeyStroke keyStrokeToOpen;
 
@@ -40,7 +41,14 @@ public class ToolBox extends JMenuBar {
 		filterMenu = new JMenu("Filters");
 		filterMenu.setMnemonic(KeyEvent.VK_I);
 		menuBar.add(filterMenu);
-
+		helpMenu = new JMenu("Help");
+		menuItem = new JMenuItem("About");
+		helpMenu.add(menuItem);
+		menuItem.addActionListener(e -> p.about());
+		menuItem = new JMenuItem("Help");
+		helpMenu.add(menuItem);
+		menuItem.addActionListener(e -> p.help());
+		menuBar.add(helpMenu);
 		menuItem = new JMenuItem("Open File");
 		menuItem.setMnemonic(KeyEvent.VK_O);
 		keyStrokeToOpen = KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK);
@@ -114,6 +122,8 @@ public class ToolBox extends JMenuBar {
 			p.reset();
 		});
 		filterMenu.add(menuItem);
+		
+		
 
 	}
 

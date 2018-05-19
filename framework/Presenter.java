@@ -17,4 +17,8 @@ public abstract class Presenter {
 	
 	public abstract void setEdit(Edit edit);
 	
+	public abstract void about();
+	
+	public abstract void help();
+	
 }

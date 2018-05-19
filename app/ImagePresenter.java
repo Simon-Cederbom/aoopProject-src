@@ -1,5 +1,6 @@
 package app;
 
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
@@ -149,6 +150,38 @@ public class ImagePresenter extends Presenter {
 		boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
 		WritableRaster raster = bi.copyData(null);
 		return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+	}
+	
+	/**
+	 *
+	 * Shows a new window with information
+	 * 
+	 */
+	public void about() {
+		JFrame frame = new JFrame("About");
+		JLabel l = new JLabel();
+		l.setText("<html>Version: 7.0<br/><br/>Authors: Filip Kågesson, Simon Cederbom</html>");
+		l.setPreferredSize(new Dimension(300,100));
+		frame.add(l);
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+	}
+	
+	/**
+	 * 
+	 * Shows a new window with information on how to use the system
+	 * 
+	 */
+	public void help() {
+		JFrame frame = new JFrame("Help");
+		JLabel l = new JLabel();
+		l.setText("<html>Using filters:<br/>Find the filter you want to use in the filter menu. To use the filter you just press the filter if it's not a scalable filter. If the filter is scalable you have to set the slider before you press the filter</html>");
+		l.setPreferredSize(new Dimension(300,100));
+		frame.add(l);
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 	}
 
 }
