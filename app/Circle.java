@@ -24,7 +24,7 @@ public class Circle extends Edit {
 	public BufferedImage edit(BufferedImage img) {
 
 		Graphics g = img.getGraphics();
-		g.setColor(new Color(0, 0, 0));
+		g.setColor(new Color(20, 20, 20));
 		g.fillArc(0, img.getHeight()/2 - img.getWidth()/2, img.getWidth(), img.getWidth(), 0, 360);	
 	
 		return img;

@@ -42,6 +42,7 @@ public class ToolBox extends JMenuBar {
 		filterMenu.setMnemonic(KeyEvent.VK_I);
 		menuBar.add(filterMenu);
 		helpMenu = new JMenu("Help");
+		helpMenu.setMnemonic(KeyEvent.VK_H);
 		menuItem = new JMenuItem("About");
 		helpMenu.add(menuItem);
 		menuItem.addActionListener(e -> p.about());
