@@ -13,7 +13,7 @@ import javax.swing.KeyStroke;
 public class ToolBox extends JMenuBar {
 
 	private ArrayList<Edit> edits = new ArrayList<Edit>();
-	private ArrayList<ScaleableEdit> scaleableEdits = new ArrayList<ScaleableEdit>();
+	private ArrayList<ScalableEdit> scalableEdits = new ArrayList<ScalableEdit>();
 	
 	private JMenuBar menuBar;
 	private JMenu fileMenu, filterMenu, subMenu, helpMenu;
@@ -29,8 +29,8 @@ public class ToolBox extends JMenuBar {
 		for (Edit e : editor.getEdits()) {
 			edits.add(e);
 		}
-		for (ScaleableEdit e : editor.getScaleableEdits()) {
-			scaleableEdits.add(e);
+		for (ScalableEdit e : editor.getScalableEdits()) {
+			scalableEdits.add(e);
 		}
 
 		menuBar = new JMenuBar();
@@ -85,7 +85,7 @@ public class ToolBox extends JMenuBar {
 			subMenu.add(menuItem);
 		}
 		
-		for (ScaleableEdit edit : scaleableEdits) {
+		for (ScalableEdit edit : scalableEdits) {
 			JSlider slider = new JSlider(JSlider.HORIZONTAL);
 			menuItem = new JMenuItem(edit.getClass().getName().substring(4));
 			menuItem.addActionListener(a -> {

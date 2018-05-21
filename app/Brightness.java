@@ -3,13 +3,13 @@ package app;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
 
-import framework.ScaleableEdit;
+import framework.ScalableEdit;
 
 /**
  * A filter to make an image brighter or darker
  *
  */
-public class Brightness extends ScaleableEdit {
+public class Brightness extends ScalableEdit {
 
 	/**
 	 * Makes the image brighter or darker depending on the scale

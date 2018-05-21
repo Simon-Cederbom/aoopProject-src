@@ -12,7 +12,7 @@ import javax.swing.*;
 
 import framework.Edit;
 import framework.Presenter;
-import framework.ScaleableEdit;
+import framework.ScalableEdit;
 
 /**
  * 
@@ -90,7 +90,7 @@ public class ImagePresenter extends Presenter {
 	 *            A value which determines how much the filter should affect the
 	 *            image
 	 */
-	public void setEdit(ScaleableEdit e, int scale) {
+	public void setEdit(ScalableEdit e, int scale) {
 		imgStack.push(e.edit(deepCopy(imgStack.peek()), scale));
 		showImage(imgStack.peek());
 	}

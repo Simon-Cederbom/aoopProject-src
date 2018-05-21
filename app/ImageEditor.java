@@ -2,7 +2,7 @@ package app;
 
 import framework.Edit;
 import framework.Editor;
-import framework.ScaleableEdit;
+import framework.ScalableEdit;
 
 /**
  * 
@@ -28,8 +28,8 @@ public class ImageEditor extends Editor{
 	 * 
 	 * @return An array of all scalable filters
 	 */
-	public ScaleableEdit[] getScaleableEdits(){
-		ScaleableEdit[] edits = {new Swirl(), new Brightness()};
+	public ScalableEdit[] getScalableEdits(){
+		ScalableEdit[] edits = {new Swirl(), new Brightness()};
 		
 		return edits;
 	}

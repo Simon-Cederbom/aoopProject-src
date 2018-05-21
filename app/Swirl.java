@@ -4,14 +4,14 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
 
-import framework.ScaleableEdit;
+import framework.ScalableEdit;
 
 /**
  * 
  * A filter that swirls an image
  *
  */
-public class Swirl extends ScaleableEdit {
+public class Swirl extends ScalableEdit {
 
 	
 	/*TODO
