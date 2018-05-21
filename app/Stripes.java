@@ -23,12 +23,16 @@ public class Stripes extends Edit {
 	 */
 	public BufferedImage edit(BufferedImage img) {
 
-		Graphics g = img.getGraphics();
-		g.setColor(new Color(0, 0, 0));
+		boolean black = false;
+
 		for (int x = 0; x < img.getWidth(); x++) {
-			if (x % (img.getWidth() / 11) == 0 && x > img.getWidth()%11 && x < img.getWidth() - img.getWidth()%11) {
-				g.fillRect(x, 0, img.getWidth() % 11, img.getHeight());
-				x += img.getWidth() % 11;
+			if (x % (img.getWidth() / 21) == 0 && x > img.getWidth() % 21 && x < img.getWidth() - img.getWidth() % 21) {
+				black = !black;
+			}
+			for (int y = 0; y < img.getHeight(); y++) {
+				if(black){
+					img.setRGB(x, y, new Color(20,20,20).getRGB());
+				}
 			}
 		}
 
