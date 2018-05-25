@@ -1,7 +1,6 @@
 package app;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import framework.Edit;
@@ -17,11 +16,13 @@ public class Stripes extends Edit {
 	/**
 	 * Creates stripes on top of the image
 	 * 
-	 * @param img The image to be changed
+	 * @param obj The object to be changed
 	 * 
-	 * @return The filtered image
+	 * @return The filtered object
 	 */
-	public BufferedImage edit(BufferedImage img) {
+	public Object edit(Object obj) {
+
+		BufferedImage img = (BufferedImage)obj;
 
 		boolean black = false;
 

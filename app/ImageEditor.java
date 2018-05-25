@@ -7,6 +7,8 @@ import framework.ScalableEdit;
 /**
  * 
  * A class to keep track of the different filters
+ * 
+ * This is where new filters are added
  *
  */
 public class ImageEditor extends Editor{

@@ -1,29 +1,46 @@
 package framework;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JSlider;
 import javax.swing.KeyStroke;
 
+/**
+ * 
+ * A class to create a generic menu
+ *
+ */
+
 public class ToolBox extends JMenuBar {
 
+	private static final long serialVersionUID = -1008830284849269116L;
 	private ArrayList<Edit> edits = new ArrayList<Edit>();
 	private ArrayList<ScalableEdit> scalableEdits = new ArrayList<ScalableEdit>();
-	
+
 	private JMenuBar menuBar;
 	private JMenu fileMenu, filterMenu, subMenu, helpMenu;
 	private JMenuItem menuItem;
 	private KeyStroke keyStrokeToOpen;
 
-	public JMenuBar getMenuBar(){
+	public JMenuBar getMenuBar() {
 		return this.menuBar;
 	}
 
+	/**
+	 * 
+	 * Generates a generic menu
+	 * 
+	 * @param p
+	 *            The presenter to execute actions
+	 * @param editor
+	 *            The editor to load filters from
+	 */
 	public ToolBox(Presenter p, Editor editor) {
 
 		for (Edit e : editor.getEdits()) {
@@ -67,14 +84,14 @@ public class ToolBox extends JMenuBar {
 			p.saveFile();
 		});
 		fileMenu.add(menuItem);
-		
+
 		menuItem = new JMenuItem("Exit");
 		menuItem.setMnemonic(KeyEvent.VK_E);
 		menuItem.addActionListener(a -> {
 			System.exit(0);
 		});
 		fileMenu.add(menuItem);
-		
+
 		subMenu = new JMenu("Filters");
 
 		for (Edit edit : edits) {
@@ -84,19 +101,24 @@ public class ToolBox extends JMenuBar {
 			});
 			subMenu.add(menuItem);
 		}
-		
+
 		for (ScalableEdit edit : scalableEdits) {
 			JSlider slider = new JSlider(JSlider.HORIZONTAL);
-			menuItem = new JMenuItem(edit.getClass().getName().substring(4));
-			menuItem.addActionListener(a -> {
+			slider.addChangeListener(e -> {
 				p.setEdit(edit, slider.getValue());
-				slider.setValue(50);
 			});
+			slider.addMouseListener(new MouseAdapter() {
+				public void mouseReleased(MouseEvent e) {
+					p.sliderReleased(edit, slider.getValue());
+					slider.setValue(50);
+				}
+			});
+			menuItem = new JMenuItem(edit.getClass().getName().substring(4));
 			subMenu.add(menuItem);
 			subMenu.add(slider);
 		}
 		filterMenu.add(subMenu);
-		
+
 		menuItem = new JMenuItem("Undo");
 		menuItem.setMnemonic(KeyEvent.VK_Z);
 		keyStrokeToOpen = KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK);
@@ -105,7 +127,7 @@ public class ToolBox extends JMenuBar {
 			p.undo();
 		});
 		filterMenu.add(menuItem);
-		
+
 		menuItem = new JMenuItem("Redo");
 		menuItem.setMnemonic(KeyEvent.VK_Y);
 		keyStrokeToOpen = KeyStroke.getKeyStroke(KeyEvent.VK_Y, KeyEvent.CTRL_DOWN_MASK);
@@ -114,7 +136,7 @@ public class ToolBox extends JMenuBar {
 			p.redo();
 		});
 		filterMenu.add(menuItem);
-		
+
 		menuItem = new JMenuItem("Reset");
 		menuItem.setMnemonic(KeyEvent.VK_R);
 		keyStrokeToOpen = KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK);
@@ -123,8 +145,6 @@ public class ToolBox extends JMenuBar {
 			p.reset();
 		});
 		filterMenu.add(menuItem);
-		
-		
 
 	}
 

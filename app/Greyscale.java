@@ -16,11 +16,13 @@ public class Greyscale extends Edit {
 	/**
 	 * Removes all filters from the image
 	 * 
-	 * @param img The image to be changed
+	 * @param obj The object to be changed
 	 * 
-	 * @return The filtered image
+	 * @return The filtered object
 	 */
-	public BufferedImage edit(BufferedImage img) {
+	public Object edit(Object obj) {
+
+		BufferedImage img = (BufferedImage)obj;
 
 		ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
 		ColorConvertOp op = new ColorConvertOp(cs, null);

@@ -8,7 +8,7 @@ import framework.Edit;
 
 /**
  * 
- * A filter to create a circle on top of an image
+ * A filter to create a black filled circle on top of an image
  *
  */
 public class Circle extends Edit {
@@ -17,11 +17,13 @@ public class Circle extends Edit {
 	 * 
 	 * Creates a circle on top of the image
 	 * 
-	 * @param img The image to be changed
+	 * @param obj The object to be changed
 	 * 
-	 * @return The filtered image
+	 * @return The filtered object
 	 */
-	public BufferedImage edit(BufferedImage img) {
+	public Object edit(Object obj) {
+
+		BufferedImage img = (BufferedImage)obj;
 
 		Graphics g = img.getGraphics();
 		g.setColor(new Color(20, 20, 20));

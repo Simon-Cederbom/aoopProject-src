@@ -13,19 +13,17 @@ import framework.ScalableEdit;
  */
 public class Swirl extends ScalableEdit {
 
-	
-	/*TODO
-	 *  Use bilinear interpolation to get the color to get rid of the noise.
-	 */
 	/**
 	 * Swirls the image
 	 * 
-	 * @param img The image to be changed
+	 * @param obj The object to be changed
 	 * @param scale A value to choose how much the image should swirl and in what direction
 	 * 
-	 * @return The filtered image
+	 * @return The filtered object
 	 */
-	public BufferedImage edit(BufferedImage img, int scale) {
+	public Object edit(Object obj, int scale){
+
+		BufferedImage img = (BufferedImage)obj;
 		
 		double scaleDouble = (scale - 50) / ((double) 10000);
 		int width  = img.getWidth();

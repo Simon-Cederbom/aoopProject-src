@@ -3,6 +3,7 @@ package app;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+
 import framework.Edit;
 
 /**
@@ -15,11 +16,13 @@ public class FlipX extends Edit {
 	/**
 	 * Flips the image horizontally
 	 * 
-	 * @param img The image to be changed
+	 * @param obj The object to be changed
 	 * 
-	 * @return The filtered image
+	 * @return The filtered object
 	 */
-	public BufferedImage edit(BufferedImage img) {
+	public Object edit(Object obj) {
+
+		BufferedImage img = (BufferedImage)obj;
 
 		AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
 		tx.translate(-img.getWidth(), 0);

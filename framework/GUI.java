@@ -1,33 +1,40 @@
 package framework;
 
 import java.awt.Dimension;
-import java.awt.ScrollPane;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
-import app.ImageEditor;
-import app.ImagePresenter;
-
+/**
+ * 
+ * A class to create the main window
+ *
+ */
 public class GUI extends JFrame {
 
+	private static final long serialVersionUID = -1893717094378742208L;
+
 	/**
-	 * Create the GUI and show it. For thread safety, this method should be
-	 * invoked from the event dispatch thread.
+	 * Create the GUI and show it. For thread safety, this method should be invoked
+	 * from the event dispatch thread.
+	 * 
+	 * @param p
+	 *            The presenter to execute actions
+	 * @param tb
+	 *            The menu to use in the main window
 	 */
-	public GUI(Presenter p, Editor editor) {
-		JFrame frame = new JFrame("Image Processing");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setJMenuBar((new ToolBox(p, editor)).getMenuBar());
+	public GUI(Presenter p, ToolBox tb) {
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setJMenuBar(tb.getMenuBar());
 		JLabel label = new JLabel("", SwingConstants.CENTER);
-		frame.setPreferredSize(new Dimension(500,500));
-		((ImagePresenter) p).setLabel(label);
-		frame.add(new JScrollPane(label));
-		frame.pack();
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
+		this.setPreferredSize(new Dimension(500, 500));
+		p.setLabel(label);
+		this.add(new JScrollPane(label));
+		this.pack();
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
 
 	}
 }

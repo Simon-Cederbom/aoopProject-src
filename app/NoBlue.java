@@ -2,6 +2,7 @@ package app;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+
 import framework.Edit;
 
 /**
@@ -14,11 +15,13 @@ public class NoBlue extends Edit {
 	/**
 	 * Removes the blue color from the image
 	 * 
-	 * @param img The image to be changed
+	 * @param obj The object to be changed
 	 * 
-	 * @return The filtered image
+	 * @return The filtered object
 	 */
-	public BufferedImage edit(BufferedImage img) {
+	public Object edit(Object obj) {
+
+		BufferedImage img = (BufferedImage)obj;
 
 		for (int y = 0; y < img.getHeight(); ++y) {
 			for (int x = 0; x < img.getWidth(); ++x) {
